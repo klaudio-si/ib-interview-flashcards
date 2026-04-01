@@ -7,242 +7,93 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Segoe UI', sans-serif; background: #0a0a15; color: #fff; min-height: 100vh; overflow: hidden; }
-
 .app { display: flex; height: 100vh; }
 
-/* ===== SIDEBAR ===== */
-.sidebar {
-  width: 320px;
-  background: #111125;
-  border-right: 1px solid #222;
-  overflow-y: auto;
-  flex-shrink: 0;
-}
-.sidebar-header {
-  padding: 20px;
-  border-bottom: 1px solid #222;
-}
+/* Sidebar */
+.sidebar { width: 320px; background: #111125; border-right: 1px solid #222; overflow-y: auto; flex-shrink: 0; }
+.sidebar-header { padding: 20px; border-bottom: 1px solid #222; }
 .sidebar-header h2 { font-size: 18px; margin-bottom: 4px; }
 .sidebar-header p { font-size: 12px; color: #666; }
-.sidebar-item {
-  padding: 14px 20px;
-  cursor: pointer;
-  border-bottom: 1px solid #1a1a2e;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.sidebar-item:hover { background: #1a1a30; }
-.sidebar-item.active { background: #1a1a3a; border-left: 3px solid var(--c); }
-.sidebar-item .si-num {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 700;
-  background: rgba(255,255,255,0.05);
-  flex-shrink: 0;
-}
-.sidebar-item.active .si-num { background: var(--c); color: #000; }
-.sidebar-item .si-text { flex: 1; }
-.sidebar-item .si-section { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #555; }
-.sidebar-item .si-title { font-size: 14px; margin-top: 2px; }
-.sidebar-item .si-dur { font-size: 11px; color: #555; }
 .back-link { display: block; padding: 15px 20px; color: #007bff; text-decoration: none; font-size: 13px; border-bottom: 1px solid #222; }
 .back-link:hover { background: #1a1a30; }
+.sidebar-item { padding: 14px 20px; cursor: pointer; border-bottom: 1px solid #1a1a2e; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+.sidebar-item:hover { background: #1a1a30; }
+.sidebar-item.active { background: #1a1a3a; border-left: 3px solid var(--c); }
+.si-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; background: rgba(255,255,255,0.05); flex-shrink: 0; }
+.sidebar-item.active .si-num { background: var(--c); color: #000; }
+.si-text { flex: 1; }
+.si-section { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #555; }
+.si-title { font-size: 14px; margin-top: 2px; }
+.si-playing { display: none; color: #00c9a7; font-size: 11px; margin-top: 2px; }
+.sidebar-item.playing .si-playing { display: block; }
 
-/* ===== MAIN VIEWER ===== */
-.viewer {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: radial-gradient(ellipse at center, #12122a 0%, #0a0a15 70%);
-}
+/* Viewer */
+.viewer { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; background: radial-gradient(ellipse at center, #12122a 0%, #0a0a15 70%); }
 
-/* Phone frame */
-.phone {
-  width: 400px;
-  height: 720px;
-  background: #0d0d1a;
-  border-radius: 44px;
-  border: 3px solid #2a2a3a;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
-}
+/* Phone */
+.phone { width: 400px; height: 720px; background: #0d0d1a; border-radius: 44px; border: 3px solid #2a2a3a; overflow: hidden; position: relative; box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05); }
 
-/* Progress bar at top */
-.vid-progress {
-  height: 3px;
-  background: #222;
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  z-index: 20;
-}
-.vid-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #007bff, #00c9a7);
-  width: 0%;
-  transition: width 0.1s linear;
-}
+/* Top progress */
+.vid-progress { height: 3px; background: #222; position: absolute; top: 0; left: 0; right: 0; z-index: 20; }
+.vid-progress-fill { height: 100%; background: linear-gradient(90deg, #007bff, #00c9a7); width: 0%; transition: width 0.2s linear; }
 
-/* Screen content */
-.screen {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 50px 28px 90px;
-  position: relative;
-  overflow: hidden;
-}
+/* Screen */
+.screen { height: 100%; display: flex; flex-direction: column; padding: 45px 28px 95px; position: relative; overflow: hidden; }
 
-/* Canvas for drawings */
-.draw-area {
-  width: 100%;
-  height: 200px;
-  position: relative;
-  margin-bottom: 15px;
-  flex-shrink: 0;
-}
-.draw-area canvas {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-}
+/* Canvas */
+.draw-area canvas { width: 100%; height: 180px; border-radius: 12px; display: block; margin-bottom: 12px; }
 
-/* Section tag */
-.vid-section {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 6px;
-}
+.vid-section { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+.vid-title { font-size: 22px; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
 
-/* Title */
-.vid-title {
-  font-size: 24px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 15px;
-}
+/* Subtitles */
+.subtitle-area { flex: 1; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.subtitle-area::-webkit-scrollbar { display: none; }
 
-/* Subtitle area */
-.subtitle-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow: hidden;
-}
-
-.subtitle-line {
-  font-size: 16px;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.3);
-  transition: all 0.3s;
-  padding: 2px 0;
-}
-.subtitle-line.active {
-  color: #fff;
-  font-weight: 600;
-  font-size: 17px;
-}
-.subtitle-line.done {
-  color: rgba(255,255,255,0.15);
+.sub-chunk {
   font-size: 15px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.15);
+  transition: color 0.4s, opacity 0.4s;
+  display: inline;
 }
+.sub-chunk.active { color: #fff; font-weight: 500; }
+.sub-chunk.spoken { color: rgba(255,255,255,0.35); }
+.sub-highlight { color: #00c9a7; font-weight: 600; }
 
-/* Highlight word */
-.sub-word { transition: color 0.15s; }
-.sub-word.highlight { color: #00c9a7; }
+/* Waveform visualizer */
+.waveform {
+  position: absolute;
+  bottom: 85px;
+  left: 28px;
+  right: 28px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.wave-bar {
+  flex: 1;
+  background: linear-gradient(180deg, #007bff, #00c9a7);
+  border-radius: 2px;
+  height: 4px;
+  transition: height 0.1s;
+  opacity: 0.5;
+}
 
 /* Controls */
-.vid-controls {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 15px 25px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  z-index: 20;
-}
-
-.ctrl-btn {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
+.vid-controls { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 25px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); display: flex; align-items: center; gap: 10px; z-index: 20; }
+.ctrl-btn { width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
 .ctrl-btn:hover { background: rgba(255,255,255,0.2); }
-.ctrl-btn.play-btn { width: 52px; height: 52px; background: #007bff; font-size: 22px; }
+.ctrl-btn.play-btn { width: 50px; height: 50px; background: #007bff; font-size: 20px; }
 .ctrl-btn.play-btn:hover { background: #0066dd; }
-
 .ctrl-time { font-size: 12px; color: #888; flex: 1; text-align: right; }
-.speed-btn {
-  padding: 4px 10px;
-  border-radius: 12px;
-  border: 1px solid #444;
-  background: transparent;
-  color: #aaa;
-  font-size: 11px;
-  cursor: pointer;
-}
+.speed-btn { padding: 4px 10px; border-radius: 12px; border: 1px solid #444; background: transparent; color: #aaa; font-size: 11px; cursor: pointer; }
 .speed-btn:hover, .speed-btn.active { border-color: #007bff; color: #007bff; }
+.vol-slider { width: 60px; accent-color: #007bff; }
 
-/* Voice selector */
-.voice-bar {
-  position: absolute;
-  top: 10px; left: 25px; right: 25px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  z-index: 20;
-}
-.voice-bar select {
-  flex: 1;
-  padding: 6px 10px;
-  background: rgba(0,0,0,0.6);
-  border: 1px solid #333;
-  color: #aaa;
-  border-radius: 8px;
-  font-size: 11px;
-}
-.voice-bar label { font-size: 10px; color: #555; }
-.mute-btn {
-  padding: 4px 10px;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background: rgba(0,0,0,0.6);
-  color: #aaa;
-  font-size: 11px;
-  cursor: pointer;
-}
-.mute-btn.muted { color: #ff4545; border-color: #ff4545; }
-
-/* Navigation hints */
-.nav-hint {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 30px;
-  color: rgba(255,255,255,0.1);
-  cursor: pointer;
-  transition: color 0.2s;
-  z-index: 5;
-  user-select: none;
-}
+/* Nav arrows */
+.nav-hint { position: absolute; top: 50%; transform: translateY(-50%); font-size: 30px; color: rgba(255,255,255,0.1); cursor: pointer; transition: color 0.2s; z-index: 5; user-select: none; }
 .nav-hint:hover { color: rgba(255,255,255,0.4); }
 .nav-hint.left { left: 15px; }
 .nav-hint.right { right: 15px; }
@@ -255,17 +106,15 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a15; color: #fff; mi
 </head>
 <body>
 <div class="app">
-  <!-- Sidebar -->
   <div class="sidebar">
     <a href="index.html" class="back-link">&larr; Back to Flashcards</a>
     <div class="sidebar-header">
       <h2>Video Reels</h2>
-      <p>17 concept explainers with narration</p>
+      <p>17 narrated concept explainers</p>
     </div>
     <div id="sidebarList"></div>
   </div>
 
-  <!-- Viewer -->
   <div class="viewer">
     <div class="nav-hint left" onclick="prevReel()">&#10094;</div>
     <div class="nav-hint right" onclick="nextReel()">&#10095;</div>
@@ -273,17 +122,12 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a15; color: #fff; mi
     <div class="phone">
       <div class="vid-progress"><div class="vid-progress-fill" id="progressFill"></div></div>
 
-      <div class="voice-bar">
-        <label>Voice:</label>
-        <select id="voiceSelect"></select>
-        <button class="mute-btn" id="muteBtn" onclick="toggleMute()">Sound ON</button>
-      </div>
-
       <div class="screen" id="screen">
-        <canvas id="drawCanvas" width="344" height="200"></canvas>
+        <canvas id="drawCanvas" width="344" height="180"></canvas>
         <div class="vid-section" id="vidSection"></div>
         <div class="vid-title" id="vidTitle"></div>
         <div class="subtitle-area" id="subtitleArea"></div>
+        <div class="waveform" id="waveform"></div>
       </div>
 
       <div class="vid-controls">
@@ -291,416 +135,297 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a15; color: #fff; mi
         <button class="ctrl-btn play-btn" id="playBtn" onclick="togglePlay()">&#9654;</button>
         <button class="ctrl-btn" onclick="nextReel()">&#9654;&#9654;</button>
         <button class="speed-btn" id="speedBtn" onclick="cycleSpeed()">1x</button>
-        <span class="ctrl-time" id="timeDisplay">0:00</span>
+        <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.1" value="1" oninput="setVolume(this.value)">
+        <span class="ctrl-time" id="timeDisplay">0:00 / 0:00</span>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-/* ===== DATA ===== */
-let reels = [];
-let current = 0;
-let playing = false;
-let muted = false;
-let speed = 1;
-let synth = window.speechSynthesis;
-let voices = [];
-let selectedVoice = null;
-let currentUtterance = null;
-let lineIndex = 0;
-let elapsed = 0;
-let progressTimer = null;
-let totalDuration = 0;
+let reels = [], audioManifest = [];
+let current = 0, playing = false, speed = 1;
+let audio = new Audio();
+let animFrame = null;
+
+/* ===== LOAD DATA ===== */
+async function init() {
+  const [reelsResp, audioResp] = await Promise.all([
+    fetch('reels_data.json'),
+    fetch('audio_manifest.json')
+  ]);
+  const reelsJson = await reelsResp.json();
+  const audioJson = await audioResp.json();
+  reels = reelsJson.reels;
+  audioManifest = audioJson.audios;
+
+  // Build waveform bars
+  const wf = document.getElementById('waveform');
+  wf.innerHTML = Array.from({length: 40}, () => '<div class="wave-bar"></div>').join('');
+
+  buildSidebar();
+  loadReel(0);
+}
+
+/* ===== SIDEBAR ===== */
+function buildSidebar() {
+  document.getElementById('sidebarList').innerHTML = reels.map((r, i) => `
+    <div class="sidebar-item" data-index="${i}" style="--c: ${r.color}" onclick="goToReel(${i})">
+      <div class="si-num">${i + 1}</div>
+      <div class="si-text">
+        <div class="si-section" style="color: ${r.color}">${r.section}</div>
+        <div class="si-title">${r.title}</div>
+        <div class="si-playing">&#9654; Playing...</div>
+      </div>
+    </div>
+  `).join('');
+  updateSidebar();
+}
+
+function updateSidebar() {
+  document.querySelectorAll('.sidebar-item').forEach(el => {
+    const i = parseInt(el.dataset.index);
+    el.classList.toggle('active', i === current);
+    el.classList.toggle('playing', i === current && playing);
+  });
+  const active = document.querySelector('.sidebar-item.active');
+  if (active) active.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
 
 /* ===== DRAWING ENGINE ===== */
 const canvas = document.getElementById('drawCanvas');
 const ctx = canvas.getContext('2d');
 
-const drawings = {
-  'acc-1': (p) => { // Income Statement
-    ctx.clearRect(0, 0, 344, 200);
-    const w = 280, h = 160, x = 32, y = 20;
-    // Box
-    ctx.strokeStyle = '#007bff44';
-    ctx.lineWidth = 2;
-    roundRect(x, y, w * p, h, 10);
-    // Lines
-    if (p > 0.1) drawRow(x+15, y+25, 'Revenue', '$1,500', '#00c9a7', Math.min((p-0.1)*2, 1));
-    if (p > 0.25) drawRow(x+15, y+50, '- COGS', '($150)', '#ff6b6b', Math.min((p-0.25)*2, 1));
-    if (p > 0.4) drawRow(x+15, y+75, '- OpEx', '($250)', '#ff6b6b', Math.min((p-0.4)*2, 1));
-    if (p > 0.55) drawRow(x+15, y+100, '- D&A', '($60)', '#ff6b6b', Math.min((p-0.55)*2, 1));
-    if (p > 0.7) { ctx.strokeStyle = '#007bff'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x+15, y+115); ctx.lineTo(x+w*p-15, y+115); ctx.stroke(); }
-    if (p > 0.75) drawRow(x+15, y+130, 'Net Income', '$627', '#00c9a7', Math.min((p-0.75)*4, 1));
-  },
-  'acc-2': (p) => { // Balance Sheet
-    ctx.clearRect(0, 0, 344, 200);
-    // Left: Assets
-    const lw = 140 * p;
-    ctx.fillStyle = '#007bff22'; ctx.fillRect(20, 20, lw, 160);
-    if (p > 0.1) { ctx.fillStyle = '#007bff'; ctx.font = 'bold 13px Segoe UI'; ctx.globalAlpha = Math.min((p-0.1)*3,1); ctx.fillText('ASSETS', 50, 50); ctx.globalAlpha = 1; }
-    if (p > 0.3) drawSmallRow(30, 70, 'Cash', p);
-    if (p > 0.4) drawSmallRow(30, 90, 'AR', p);
-    if (p > 0.5) drawSmallRow(30, 110, 'PP&E', p);
-    if (p > 0.6) drawSmallRow(30, 130, 'Goodwill', p);
-    // Equals sign
-    if (p > 0.5) { ctx.fillStyle = '#fff'; ctx.font = 'bold 24px Segoe UI'; ctx.globalAlpha = (p-0.5)*2; ctx.fillText('=', 165, 105); ctx.globalAlpha = 1; }
-    // Right: L+E
-    if (p > 0.5) {
-      const rw = 140 * Math.min((p-0.5)*2, 1);
-      ctx.fillStyle = '#ff454522'; ctx.fillRect(185, 20, rw, 80);
-      ctx.fillStyle = '#00c9a722'; ctx.fillRect(185, 100, rw, 80);
-      if (p > 0.6) { ctx.fillStyle = '#ff4545'; ctx.font = 'bold 12px Segoe UI'; ctx.globalAlpha = Math.min((p-0.6)*3,1); ctx.fillText('LIABILITIES', 200, 50); ctx.globalAlpha = 1; }
-      if (p > 0.7) { ctx.fillStyle = '#00c9a7'; ctx.font = 'bold 12px Segoe UI'; ctx.globalAlpha = Math.min((p-0.7)*3,1); ctx.fillText('EQUITY', 210, 130); ctx.globalAlpha = 1; }
-    }
-  },
-  'acc-3': (p) => { // Cash Flow Statement
-    ctx.clearRect(0, 0, 344, 200);
-    const sections = [
-      { label: 'CFO', color: '#007bff', y: 25 },
-      { label: 'CFI', color: '#ff8c00', y: 85 },
-      { label: 'CFF', color: '#a855f7', y: 145 },
+const drawFns = {
+  'acc-1': p => { // Income Statement waterfall
+    ctx.clearRect(0,0,344,180);
+    const items = [
+      {l:'Revenue',v:1500,c:'#00c9a7'}, {l:'COGS',v:-150,c:'#ff6b6b'},
+      {l:'OpEx',v:-250,c:'#ff6b6b'}, {l:'D&A',v:-60,c:'#ff8c00'},
+      {l:'Tax',v:-413,c:'#ff4545'}, {l:'Net Inc',v:627,c:'#007bff'}
     ];
-    sections.forEach((s, i) => {
-      const sp = Math.max(0, Math.min((p - i*0.25) * 3, 1));
-      if (sp <= 0) return;
-      ctx.fillStyle = s.color + '22';
-      ctx.fillRect(20, s.y, 304 * sp, 45);
-      ctx.fillStyle = s.color;
-      ctx.font = 'bold 14px Segoe UI';
-      ctx.globalAlpha = sp;
-      ctx.fillText(s.label, 30, s.y + 28);
+    let x = 15;
+    items.forEach((item, i) => {
+      const ap = Math.max(0, Math.min((p - i*0.12)*3, 1));
+      if (ap <= 0) return;
+      const h = Math.abs(item.v) / 20 * ap;
+      const y = item.v > 0 ? 150 - h : 150;
+      ctx.fillStyle = item.c + '88';
+      ctx.fillRect(x, y, 45, h);
+      ctx.fillStyle = item.c;
+      ctx.font = '10px Segoe UI';
+      ctx.globalAlpha = ap;
+      ctx.fillText(item.l, x, 170);
       ctx.globalAlpha = 1;
+      x += 55;
     });
-    // Arrow flowing down
-    if (p > 0.8) {
-      ctx.strokeStyle = '#00c9a7';
-      ctx.lineWidth = 2;
-      ctx.globalAlpha = (p-0.8)*5;
-      ctx.beginPath(); ctx.moveTo(172, 70); ctx.lineTo(172, 80); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(172, 130); ctx.lineTo(172, 140); ctx.stroke();
-      ctx.globalAlpha = 1;
-    }
   },
-  'default': (p) => { // Generic animated dots
-    ctx.clearRect(0, 0, 344, 200);
-    const count = 8;
-    for (let i = 0; i < count; i++) {
-      const ip = Math.max(0, Math.min((p - i/(count*2)) * 3, 1));
-      if (ip <= 0) continue;
-      const cx = 40 + (i % 4) * 80;
-      const cy = 50 + Math.floor(i / 4) * 80;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 15 * ip, 0, Math.PI * 2);
-      ctx.fillStyle = `hsl(${200 + i*20}, 70%, 60%)`;
-      ctx.globalAlpha = ip * 0.6;
-      ctx.fill();
-      ctx.globalAlpha = 1;
+  'acc-2': p => { // Balance Sheet
+    ctx.clearRect(0,0,344,180);
+    const lw = 140*p;
+    ctx.fillStyle='#007bff22'; ctx.fillRect(20,15,lw,150);
+    if(p>0.1){ctx.fillStyle='#007bff';ctx.font='bold 13px Segoe UI';ctx.globalAlpha=Math.min((p-0.1)*3,1);ctx.fillText('ASSETS',55,45);ctx.globalAlpha=1;}
+    if(p>0.3){ctx.fillStyle='#aab';ctx.font='11px Segoe UI';ctx.globalAlpha=Math.min((p-0.3)*3,1);['Cash','AR','PP&E','Goodwill'].forEach((t,i)=>ctx.fillText(t,35,70+i*22));ctx.globalAlpha=1;}
+    if(p>0.5){ctx.fillStyle='#fff';ctx.font='bold 22px Segoe UI';ctx.globalAlpha=(p-0.5)*2;ctx.fillText('=',165,95);ctx.globalAlpha=1;}
+    if(p>0.5){const rw=140*Math.min((p-0.5)*2,1);ctx.fillStyle='#ff454522';ctx.fillRect(185,15,rw,75);ctx.fillStyle='#00c9a722';ctx.fillRect(185,90,rw,75);}
+    if(p>0.65){ctx.fillStyle='#ff4545';ctx.font='bold 12px Segoe UI';ctx.globalAlpha=Math.min((p-0.65)*4,1);ctx.fillText('LIABILITIES',198,50);ctx.globalAlpha=1;}
+    if(p>0.75){ctx.fillStyle='#00c9a7';ctx.font='bold 12px Segoe UI';ctx.globalAlpha=Math.min((p-0.75)*4,1);ctx.fillText('EQUITY',210,125);ctx.globalAlpha=1;}
+  },
+  'acc-3': p => { // Cash Flow 3 sections
+    ctx.clearRect(0,0,344,180);
+    [{l:'CFO',c:'#007bff',y:10},{l:'CFI',c:'#ff8c00',y:65},{l:'CFF',c:'#a855f7',y:120}].forEach((s,i)=>{
+      const sp=Math.max(0,Math.min((p-i*0.2)*2.5,1));
+      if(sp<=0)return;
+      ctx.fillStyle=s.c+'22';ctx.fillRect(20,s.y,304*sp,45);ctx.strokeStyle=s.c+'44';ctx.lineWidth=1;ctx.strokeRect(20,s.y,304*sp,45);
+      ctx.fillStyle=s.c;ctx.font='bold 14px Segoe UI';ctx.globalAlpha=sp;ctx.fillText(s.l,30,s.y+28);ctx.globalAlpha=1;
+    });
+    if(p>0.7){ctx.strokeStyle='#00c9a7';ctx.lineWidth=2;ctx.globalAlpha=(p-0.7)*3;
+      [55,110].forEach(y=>{ctx.beginPath();ctx.moveTo(172,y);ctx.lineTo(172,y+10);ctx.lineTo(168,y+6);ctx.moveTo(172,y+10);ctx.lineTo(176,y+6);ctx.stroke();});
+      ctx.globalAlpha=1;}
+  },
+  'acc-4': p => { // 3 linked boxes
+    ctx.clearRect(0,0,344,180);
+    const boxes=[{l:'Income\nStatement',c:'#007bff',x:20},{l:'Cash Flow\nStatement',c:'#00c9a7',x:130},{l:'Balance\nSheet',c:'#ff8c00',x:240}];
+    boxes.forEach((b,i)=>{
+      const bp=Math.max(0,Math.min((p-i*0.15)*2.5,1));
+      if(bp<=0)return;
+      ctx.fillStyle=b.c+'22';ctx.fillRect(b.x,40,90*bp,80);ctx.strokeStyle=b.c;ctx.lineWidth=2;ctx.strokeRect(b.x,40,90*bp,80);
+      ctx.fillStyle='#fff';ctx.font='bold 11px Segoe UI';ctx.globalAlpha=bp;
+      b.l.split('\n').forEach((line,li)=>ctx.fillText(line,b.x+8,70+li*15));
+      ctx.globalAlpha=1;
+    });
+    if(p>0.5){ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.globalAlpha=Math.min((p-0.5)*3,1);
+      ctx.beginPath();ctx.moveTo(110,80);ctx.lineTo(130,80);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(220,80);ctx.lineTo(240,80);ctx.stroke();
+      ctx.globalAlpha=1;}
+    if(p>0.8){ctx.font='10px Segoe UI';ctx.fillStyle='#888';ctx.globalAlpha=(p-0.8)*5;
+      ctx.fillText('Net Income',105,135);ctx.fillText('Cash changes',210,135);
+      ctx.globalAlpha=1;}
+  },
+  'acc-5': p => { // Change flow arrows
+    ctx.clearRect(0,0,344,180);
+    const steps=[{l:'Depr +$10',c:'#ff8c00',y:15},{l:'IS: NI -$6',c:'#ff4545',y:55},{l:'CFS: +$4',c:'#00c9a7',y:95},{l:'BS: Balanced',c:'#007bff',y:135}];
+    steps.forEach((s,i)=>{
+      const sp=Math.max(0,Math.min((p-i*0.2)*3,1));
+      if(sp<=0)return;
+      ctx.fillStyle=s.c+'33';ctx.fillRect(50,s.y,244*sp,30);
+      ctx.fillStyle=s.c;ctx.font='bold 13px Segoe UI';ctx.globalAlpha=sp;ctx.fillText(s.l,60,s.y+20);ctx.globalAlpha=1;
+      if(i>0&&sp>0.5){ctx.strokeStyle='#ffffff33';ctx.beginPath();ctx.moveTo(172,s.y-10);ctx.lineTo(172,s.y);ctx.stroke();}
+    });
+  },
+  'default': p => {
+    ctx.clearRect(0,0,344,180);
+    for(let i=0;i<12;i++){
+      const ip=Math.max(0,Math.min((p-i/24)*3,1));
+      if(ip<=0)continue;
+      const cx=40+(i%4)*90, cy=40+Math.floor(i/4)*55;
+      ctx.beginPath();ctx.arc(cx,cy,12*ip,0,Math.PI*2);
+      ctx.fillStyle=`hsl(${200+i*15},70%,60%)`;ctx.globalAlpha=ip*0.5;ctx.fill();ctx.globalAlpha=1;
     }
   }
 };
+// Map IDs to draw functions
+const getDraw = id => drawFns[id] || drawFns['default'];
 
-function roundRect(x, y, w, h, r) {
-  if (w < 1) return;
-  ctx.beginPath();
-  ctx.moveTo(x+r, y);
-  ctx.lineTo(x+w-r, y); ctx.quadraticCurveTo(x+w, y, x+w, y+r);
-  ctx.lineTo(x+w, y+h-r); ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
-  ctx.lineTo(x+r, y+h); ctx.quadraticCurveTo(x, y+h, x, y+h-r);
-  ctx.lineTo(x, y+r); ctx.quadraticCurveTo(x, y, x+r, y);
-  ctx.stroke();
+/* ===== SUBTITLE ENGINE ===== */
+function buildSubtitles(script) {
+  // Split into sentences/chunks for subtitle display
+  const sentences = script.match(/[^.!?]+[.!?]+/g) || [script];
+  return sentences.map(s => s.trim()).filter(s => s.length > 0);
 }
 
-function drawRow(x, y, label, value, color, alpha) {
-  ctx.globalAlpha = alpha;
-  ctx.fillStyle = '#aab'; ctx.font = '12px Segoe UI'; ctx.fillText(label, x, y);
-  ctx.fillStyle = color; ctx.font = 'bold 12px Segoe UI'; ctx.fillText(value, x + 180, y);
-  ctx.globalAlpha = 1;
-}
-
-function drawSmallRow(x, y, label, p) {
-  ctx.fillStyle = '#aab'; ctx.font = '11px Segoe UI';
-  ctx.globalAlpha = Math.min(p*2, 1);
-  ctx.fillText(label, x, y);
-  ctx.globalAlpha = 1;
-}
-
-/* ===== VOICE ===== */
-function loadVoices() {
-  voices = synth.getVoices();
-  const select = document.getElementById('voiceSelect');
-  select.innerHTML = '';
-
-  // Prefer English voices, put good ones first
-  const sorted = voices
-    .filter(v => v.lang.startsWith('en'))
-    .sort((a, b) => {
-      // Prefer non-default, non-Google voices first for variety
-      if (a.name.includes('Google') && !b.name.includes('Google')) return 1;
-      if (!a.name.includes('Google') && b.name.includes('Google')) return -1;
-      return a.name.localeCompare(b.name);
-    });
-
-  sorted.forEach((v, i) => {
-    const opt = document.createElement('option');
-    opt.value = i;
-    opt.textContent = `${v.name} (${v.lang})`;
-    select.appendChild(opt);
-  });
-
-  // Try to find a good default
-  const preferred = sorted.findIndex(v =>
-    v.name.includes('Microsoft') || v.name.includes('Google UK') || v.name.includes('Daniel') || v.name.includes('Samantha')
-  );
-  if (preferred >= 0) select.value = preferred;
-
-  selectedVoice = sorted[select.value] || sorted[0] || voices[0];
-  select.onchange = () => { selectedVoice = sorted[select.value]; };
-}
-
-synth.onvoiceschanged = loadVoices;
-loadVoices();
-
-function toggleMute() {
-  muted = !muted;
-  const btn = document.getElementById('muteBtn');
-  btn.textContent = muted ? 'Sound OFF' : 'Sound ON';
-  btn.classList.toggle('muted', muted);
-  if (muted) synth.cancel();
-}
-
-/* ===== NARRATION ENGINE ===== */
-function buildNarrationScript(reel) {
-  const lines = [];
-  lines.push(reel.title + '.');
-  lines.push(reel.content);
-  reel.key_points.forEach((p, i) => {
-    lines.push(p + '.');
-  });
-  lines.push('Golden Rule: ' + reel.golden_rule);
-  if (reel.pro_tip) lines.push('Pro tip: ' + reel.pro_tip);
-  return lines;
-}
-
-function renderSubtitles(lines) {
+function renderSubtitles(chunks) {
   const area = document.getElementById('subtitleArea');
-  area.innerHTML = lines.map((line, i) =>
-    `<div class="subtitle-line" data-line="${i}">${line.split(' ').map((w, j) =>
-      `<span class="sub-word" data-word="${j}">${w}</span>`
-    ).join(' ')}</div>`
+  area.innerHTML = chunks.map((chunk, i) =>
+    `<span class="sub-chunk" data-chunk="${i}">${chunk} </span>`
   ).join('');
 }
 
-function speakLine(lines, index, onDone) {
-  if (index >= lines.length) { onDone(); return; }
-
-  lineIndex = index;
-
-  // Update subtitle highlighting
-  document.querySelectorAll('.subtitle-line').forEach(el => {
-    const li = parseInt(el.dataset.line);
-    el.classList.remove('active', 'done');
-    if (li < index) el.classList.add('done');
-    if (li === index) el.classList.add('active');
-  });
-
-  // Scroll active line into view
-  const activeLine = document.querySelector('.subtitle-line.active');
-  if (activeLine) activeLine.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-  if (muted) {
-    // Silent mode - just show subtitles with timing
-    const words = lines[index].split(' ');
-    let wi = 0;
-    const wordTimer = setInterval(() => {
-      if (!playing) { clearInterval(wordTimer); return; }
-      if (wi < words.length) {
-        document.querySelectorAll(`.subtitle-line[data-line="${index}"] .sub-word`).forEach(w => w.classList.remove('highlight'));
-        const wordEl = document.querySelector(`.subtitle-line[data-line="${index}"] .sub-word[data-word="${wi}"]`);
-        if (wordEl) wordEl.classList.add('highlight');
-        wi++;
-      } else {
-        clearInterval(wordTimer);
-        setTimeout(() => { if (playing) speakLine(lines, index + 1, onDone); }, 200);
-      }
-    }, 120 / speed);
-    return;
-  }
-
-  const utter = new SpeechSynthesisUtterance(lines[index]);
-  utter.voice = selectedVoice;
-  utter.rate = speed;
-  utter.pitch = 1;
-  currentUtterance = utter;
-
-  // Word boundary highlighting
-  let wordIdx = 0;
-  utter.onboundary = (e) => {
-    if (e.name === 'word') {
-      document.querySelectorAll(`.subtitle-line[data-line="${index}"] .sub-word`).forEach(w => w.classList.remove('highlight'));
-      const wordEl = document.querySelector(`.subtitle-line[data-line="${index}"] .sub-word[data-word="${wordIdx}"]`);
-      if (wordEl) wordEl.classList.add('highlight');
-      wordIdx++;
+function updateSubtitleHighlight(progress, chunks) {
+  // Estimate which chunk should be active based on audio progress
+  const chunkIndex = Math.floor(progress * chunks.length);
+  document.querySelectorAll('.sub-chunk').forEach(el => {
+    const i = parseInt(el.dataset.chunk);
+    el.classList.remove('active', 'spoken');
+    if (i < chunkIndex) el.classList.add('spoken');
+    if (i === chunkIndex) {
+      el.classList.add('active');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-  };
-
-  utter.onend = () => {
-    if (playing) speakLine(lines, index + 1, onDone);
-  };
-
-  utter.onerror = () => {
-    if (playing) speakLine(lines, index + 1, onDone);
-  };
-
-  synth.speak(utter);
+  });
 }
 
-/* ===== DRAWING ANIMATION ===== */
-let drawFrame = null;
-
-function animateDrawing(reelId, duration) {
-  const drawFn = drawings[reelId] || drawings['default'];
-  const start = performance.now();
-
-  function frame(now) {
-    const p = Math.min((now - start) / (duration * 1000), 1);
-    drawFn(p);
-    if (p < 1 && playing) drawFrame = requestAnimationFrame(frame);
-  }
-  drawFrame = requestAnimationFrame(frame);
+/* ===== WAVEFORM VISUALIZER ===== */
+function updateWaveform() {
+  const bars = document.querySelectorAll('.wave-bar');
+  bars.forEach(bar => {
+    const h = playing ? 4 + Math.random() * 22 : 4;
+    bar.style.height = h + 'px';
+    bar.style.opacity = playing ? 0.5 + Math.random() * 0.3 : 0.2;
+  });
 }
 
-/* ===== PLAYBACK ===== */
-function playReel() {
+/* ===== AUDIO PLAYBACK ===== */
+function loadReel(index) {
+  current = index;
   const reel = reels[current];
-  const lines = buildNarrationScript(reel);
-  const estDuration = lines.join(' ').split(' ').length * 0.35 / speed; // rough estimate
+  const manifest = audioManifest.find(a => a.id === reel.id);
 
-  totalDuration = estDuration;
-  elapsed = 0;
-
-  // Set visual state
   document.getElementById('vidSection').textContent = reel.section;
   document.getElementById('vidSection').style.color = reel.color;
   document.getElementById('vidTitle').textContent = reel.title;
-  renderSubtitles(lines.slice(1)); // skip title from subtitles (it's shown as header)
 
-  // Start drawing animation
-  if (drawFrame) cancelAnimationFrame(drawFrame);
-  animateDrawing(reel.id, estDuration);
+  // Load audio
+  audio.pause();
+  audio.src = manifest ? manifest.file : '';
+  audio.playbackRate = speed;
+  audio.load();
 
-  // Start narration
-  synth.cancel();
-  playing = true;
-  document.getElementById('playBtn').innerHTML = '&#9646;&#9646;';
+  // Build subtitles from script
+  const script = manifest ? manifest.script : reel.content;
+  const chunks = buildSubtitles(script);
+  renderSubtitles(chunks);
 
-  // Progress timer
-  if (progressTimer) clearInterval(progressTimer);
-  progressTimer = setInterval(() => {
-    if (!playing) return;
-    elapsed += 0.1;
-    const pct = Math.min((elapsed / totalDuration) * 100, 100);
+  // Draw static preview
+  getDraw(reel.id)(1);
+
+  // Reset progress
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('timeDisplay').textContent = '0:00 / 0:00';
+
+  updateSidebar();
+
+  // Audio time update
+  audio.ontimeupdate = () => {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
     document.getElementById('progressFill').style.width = pct + '%';
-    const mins = Math.floor(elapsed / 60);
-    const secs = Math.floor(elapsed % 60);
-    document.getElementById('timeDisplay').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-  }, 100);
 
-  speakLine([reel.title + '.', ...lines.slice(1)], 0, () => {
-    // Reel finished - auto next after short pause
+    const cur = formatTime(audio.currentTime);
+    const tot = formatTime(audio.duration);
+    document.getElementById('timeDisplay').textContent = `${cur} / ${tot}`;
+
+    // Update subtitles
+    updateSubtitleHighlight(audio.currentTime / audio.duration, chunks);
+
+    // Update drawing
+    getDraw(reel.id)(audio.currentTime / audio.duration);
+
+    // Waveform
+    updateWaveform();
+  };
+
+  audio.onended = () => {
     playing = false;
     document.getElementById('playBtn').innerHTML = '&#9654;';
-    if (progressTimer) clearInterval(progressTimer);
-    document.getElementById('progressFill').style.width = '100%';
-
+    updateSidebar();
+    // Auto-next after 1.5s
     setTimeout(() => {
-      if (current < reels.length - 1) {
-        current++;
-        updateSidebar();
-        playReel();
-      }
+      if (current < reels.length - 1) goToReel(current + 1, true);
     }, 1500);
-  });
-}
-
-function stopPlayback() {
-  playing = false;
-  synth.cancel();
-  if (drawFrame) cancelAnimationFrame(drawFrame);
-  if (progressTimer) clearInterval(progressTimer);
-  document.getElementById('playBtn').innerHTML = '&#9654;';
+  };
 }
 
 function togglePlay() {
   if (playing) {
-    stopPlayback();
+    audio.pause();
+    playing = false;
+    document.getElementById('playBtn').innerHTML = '&#9654;';
   } else {
-    playReel();
+    audio.playbackRate = speed;
+    audio.play().catch(e => console.log('Play blocked:', e));
+    playing = true;
+    document.getElementById('playBtn').innerHTML = '&#9646;&#9646;';
+  }
+  updateSidebar();
+}
+
+function goToReel(i, autoplay = false) {
+  playing = false;
+  audio.pause();
+  current = i;
+  loadReel(i);
+  if (autoplay) {
+    setTimeout(() => togglePlay(), 300);
   }
 }
 
-function nextReel() {
-  stopPlayback();
-  current = (current + 1) % reels.length;
-  updateSidebar();
-  loadReelVisuals();
-}
-
-function prevReel() {
-  stopPlayback();
-  current = (current - 1 + reels.length) % reels.length;
-  updateSidebar();
-  loadReelVisuals();
-}
-
-function goToReel(i) {
-  stopPlayback();
-  current = i;
-  updateSidebar();
-  loadReelVisuals();
-}
-
-function loadReelVisuals() {
-  const reel = reels[current];
-  document.getElementById('vidSection').textContent = reel.section;
-  document.getElementById('vidSection').style.color = reel.color;
-  document.getElementById('vidTitle').textContent = reel.title;
-  const lines = buildNarrationScript(reel);
-  renderSubtitles(lines.slice(1));
-  document.getElementById('progressFill').style.width = '0%';
-  document.getElementById('timeDisplay').textContent = '0:00';
-  // Draw static preview
-  const drawFn = drawings[reel.id] || drawings['default'];
-  drawFn(1);
-}
+function nextReel() { goToReel((current + 1) % reels.length); }
+function prevReel() { goToReel((current - 1 + reels.length) % reels.length); }
 
 function cycleSpeed() {
   const speeds = [0.75, 1, 1.25, 1.5, 2];
-  const idx = speeds.indexOf(speed);
-  speed = speeds[(idx + 1) % speeds.length];
+  speed = speeds[(speeds.indexOf(speed) + 1) % speeds.length];
+  audio.playbackRate = speed;
   document.getElementById('speedBtn').textContent = speed + 'x';
 }
 
-/* ===== SIDEBAR ===== */
-function buildSidebar() {
-  const list = document.getElementById('sidebarList');
-  list.innerHTML = reels.map((r, i) => `
-    <div class="sidebar-item ${i === 0 ? 'active' : ''}" data-index="${i}" style="--c: ${r.color}" onclick="goToReel(${i})">
-      <div class="si-num">${i + 1}</div>
-      <div class="si-text">
-        <div class="si-section" style="color: ${r.color}">${r.section}</div>
-        <div class="si-title">${r.title}</div>
-      </div>
-    </div>
-  `).join('');
-}
+function setVolume(v) { audio.volume = parseFloat(v); }
 
-function updateSidebar() {
-  document.querySelectorAll('.sidebar-item').forEach(el => {
-    el.classList.toggle('active', parseInt(el.dataset.index) === current);
-  });
-  const activeItem = document.querySelector('.sidebar-item.active');
-  if (activeItem) activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
 }
 
 /* ===== KEYBOARD ===== */
@@ -708,17 +433,10 @@ document.addEventListener('keydown', e => {
   if (e.key === ' ') { e.preventDefault(); togglePlay(); }
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); nextReel(); }
   if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prevReel(); }
-  if (e.key === 'm') toggleMute();
 });
 
-/* ===== INIT ===== */
-async function init() {
-  const resp = await fetch('reels_data.json');
-  const data = await resp.json();
-  reels = data.reels;
-  buildSidebar();
-  loadReelVisuals();
-}
+/* ===== Waveform idle animation ===== */
+setInterval(updateWaveform, 100);
 
 init();
 </script>

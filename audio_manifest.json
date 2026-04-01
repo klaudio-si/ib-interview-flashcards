@@ -1,0 +1,106 @@
+{
+  "audios": [
+    {
+      "id": "acc-1",
+      "file": "audio/acc-1.mp3",
+      "size": 412416,
+      "script": "Alright, let's talk about the Income Statement. This is the first thing you need to nail in any finance interview. Think of it as a report card... for a company's profitability. It covers a specific period, like a quarter or a year. Here's the flow. Revenue at the top... that's everything the company sold. Subtract the Cost of Goods Sold, and you get Gross Profit. Then subtract Operating Expenses, Depreciation, and Amortization... that gives you Operating Income. Add or subtract interest and other items... and you land on Pre-Tax Income. Finally, subtract taxes, and boom... Net Income. The bottom line. Now here's the golden rule. For something to appear on the Income Statement, it must do two things: One, it must affect the company's taxes. And two, it must correspond to that specific time period. That's why Capital Expenditures never appear here... they last 10 to 20 years. And Dividends? Also never... because they're not tax-deductible. Remember this, and you'll be able to answer any curveball they throw at you."
+    },
+    {
+      "id": "acc-2",
+      "file": "audio/acc-2.mp3",
+      "size": 425376,
+      "script": "The Balance Sheet. This one's all about a single snapshot in time. It answers one question: what does the company own, and how did it pay for it? On the left side, you've got Assets. Cash, Accounts Receivable, Inventory, Property and Equipment, Goodwill. On the right side? Liabilities and Equity. That's how those assets were funded. Debt, Accounts Payable, and then the company's own equity. And here's the most important rule in all of accounting: Assets must always... always... equal Liabilities plus Equity. No exceptions. Ever. Think about it like your personal balance sheet. You own a house worth 500K and have 30K in cash. Those are your assets. But you have a 380K mortgage. That's a liability. The rest? That's your equity... your saved up earnings. 500 plus 30 equals 380 plus 150. It balances. If an interviewer asks you anything about the Balance Sheet, start with this equation. It will guide you to the answer every single time."
+    },
+    {
+      "id": "acc-3",
+      "file": "audio/acc-3.mp3",
+      "size": 415584,
+      "script": "Now, the Cash Flow Statement. This one exists for a very specific reason. The Income Statement includes non-cash items. Depreciation, for example. It shows up as an expense, but no actual cash left the building. So the Cash Flow Statement says: let's figure out what actually happened to the cash. It has three sections. Cash Flow from Operations. Start with Net Income, add back non-cash stuff like Depreciation, and adjust for changes in working capital. Cash Flow from Investing. This is CapEx, acquisitions, buying and selling investments. And Cash Flow from Financing. Issuing or repaying debt, paying dividends, buying back shares. Add all three together, and you get the actual change in cash for the period. Here's a key insight. If something already showed up on the Income Statement as a real cash expense... it does not appear again on the Cash Flow Statement. Depreciation gets added back because it wasn't real cash. But a salary expense? Already counted. Master these three sections, and you're golden."
+    },
+    {
+      "id": "acc-4",
+      "file": "audio/acc-4.mp3",
+      "size": 402048,
+      "script": "Okay, this is the single most asked question in investment banking interviews. Walk me through how the three financial statements link together. Here's the answer. Step one. Net Income from the bottom of the Income Statement flows into the top of the Cash Flow Statement. Step two. On the Cash Flow Statement, you adjust for non-cash items and changes in working capital. Then you factor in investing and financing activities. Step three. The net change in cash from the Cash Flow Statement... updates the Cash line on the Balance Sheet. Step four. Net Income also flows into Retained Earnings on the Balance Sheet. Specifically, Retained Earnings goes up by Net Income, minus any Dividends paid. And step five. After everything, the Balance Sheet must still balance. Assets equals Liabilities plus Equity. That's it. Income Statement first, then Cash Flow Statement, then Balance Sheet. Practice saying this out loud until it's automatic. Because they will ask you. Guaranteed."
+    },
+    {
+      "id": "acc-5",
+      "file": "audio/acc-5.mp3",
+      "size": 428688,
+      "script": "Let's trace an actual change through all three statements. This is how you prove you really understand accounting. The classic question: What happens if Depreciation increases by 10 dollars? Assume a 40 percent tax rate. Income Statement first. Depreciation is an expense, so Pre-Tax Income drops by 10. But taxes also drop... by 4 dollars. So Net Income decreases by only 6. Cash Flow Statement next. Net Income is down 6 at the top. But Depreciation is a non-cash expense, so we add back the full 10 dollars. Net effect? Cash is up by 4. Now the Balance Sheet. On the asset side: Cash goes up by 4, but PP&E goes down by 10 because of the extra Depreciation. So total Assets decrease by 6. On the other side: Retained Earnings drops by 6 because Net Income was lower. Assets down 6. Liabilities plus Equity down 6. It balances. The trick is always: start with the Income Statement, calculate the tax impact, flow through Cash Flow, then check the Balance Sheet."
+    },
+    {
+      "id": "dcf-1",
+      "file": "audio/dcf-1.mp3",
+      "size": 484992,
+      "script": "DCF. Discounted Cash Flow. This is probably the most important valuation method you'll need to know. The core idea is beautifully simple. A company is worth the present value of all its future cash flows. A dollar today is worth more than a dollar tomorrow. So we discount future cash flows back to today. Here's how it works in five steps. One. Project the company's Free Cash Flow for the next 5 to 10 years. Two. Calculate the Terminal Value... that's the company's value beyond the projection period. Three. Discount everything back to today using the Weighted Average Cost of Capital, or WACC. Four. Add it all up. That gives you Enterprise Value. Five. Subtract Net Debt to get Equity Value. Divide by shares for a per-share price. One thing to watch: the Terminal Value usually accounts for 50 to 80 percent of the total value. If it's higher than 85 percent, your near-term projections might be too conservative. The DCF is powerful because it's based on fundamentals, not market sentiment. But it's also very sensitive to your assumptions. Small changes in growth or discount rates can swing the value dramatically."
+    },
+    {
+      "id": "dcf-2",
+      "file": "audio/dcf-2.mp3",
+      "size": 417312,
+      "script": "A crucial skill: converting Revenue into Free Cash Flow. Here's the step by step. Start with Revenue. Subtract Cost of Goods Sold and Operating Expenses. That gives you EBIT... Earnings Before Interest and Taxes. Now, tax it. Multiply EBIT by one minus the tax rate. This gives you NOPAT... Net Operating Profit After Tax. Then add back Depreciation and Amortization. Remember, these reduced your EBIT but they're not real cash expenses. Subtract changes in Working Capital. If the company's Accounts Receivable went up, that's cash tied up... so it reduces Free Cash Flow. And finally, subtract Capital Expenditures. What you're left with is Unlevered Free Cash Flow. Why \"unlevered\"? Because we excluded all interest and debt effects. This represents the cash available to all investors... both debt and equity holders. If they ask for Levered Free Cash Flow instead, you'd also subtract interest expense and mandatory debt repayments. That shows what's left for equity holders only."
+    },
+    {
+      "id": "dcf-3",
+      "file": "audio/dcf-3.mp3",
+      "size": 411696,
+      "script": "WACC. The Weighted Average Cost of Capital. This is the discount rate you use in a DCF. Think of it as the blended cost of all the money a company uses... both debt and equity. The formula: WACC equals the percentage of equity times the cost of equity... plus the percentage of debt times the cost of debt times one minus the tax rate. Why do we multiply debt by one minus tax? Because interest is tax-deductible. The real cost of debt is lower than the stated rate. For Cost of Equity, you use the Capital Asset Pricing Model. Cost of Equity equals the Risk-Free Rate... plus Beta times the Equity Risk Premium. The Risk-Free Rate is typically the 10-year government bond yield. Beta measures how volatile the stock is compared to the market. And the Equity Risk Premium is the extra return investors demand for stocks over bonds. Higher WACC means future cash flows are worth less today... which means a lower valuation. Typical WACC for most companies: 8 to 12 percent. Stable companies on the lower end, risky ones higher."
+    },
+    {
+      "id": "dcf-4",
+      "file": "audio/dcf-4.mp3",
+      "size": 432864,
+      "script": "Terminal Value. This captures everything beyond your projection period. And it's usually the biggest chunk of your DCF... 50 to 80 percent of total value. There are two methods. Method one: the Gordon Growth Model. Take the final year's Free Cash Flow, multiply by one plus the long-term growth rate, and divide by WACC minus that growth rate. Critical rule: the growth rate can never exceed GDP growth. Usually 2 to 3 percent. No company grows faster than the economy forever. Method two: the Multiples Method. Take the final year's EBITDA and multiply by an exit multiple. This is more common in banking because it's grounded in market data. In practice, you calculate Terminal Value and then discount it back to the present... just like the projected cash flows. Here's a sanity check. If Terminal Value is more than 85 percent of your total Enterprise Value, something might be off. Either your near-term projections are too conservative, or your terminal assumptions are too aggressive. In banking, the Multiples Method is standard. In academia, Gordon Growth gets more love."
+    },
+    {
+      "id": "ev-1",
+      "file": "audio/ev-1.mp3",
+      "size": 473328,
+      "script": "Two ways to measure what a company is worth. This distinction trips up a lot of candidates. Equity Value is simple. Share price times diluted shares outstanding. It's what equity holders own. When the news says a company is worth 10 billion, they usually mean Equity Value. Enterprise Value is different. It's Equity Value... plus Debt, plus Preferred Stock, plus Minority Interest... minus Cash. Why? Because Enterprise Value represents what you'd truly pay to acquire the entire company. You're buying the equity, but you also assume the debt. However, you get the cash on the balance sheet. Think of buying a house. The price you pay is the equity. But the total cost includes the mortgage too. And if there's cash in the safe, that offsets your cost. Here's the critical rule for interviews. Always match your metrics. Enterprise Value goes with EBIT, EBITDA, and Revenue. These are metrics available to all investors. Equity Value goes with Net Income and EPS. These are for equity holders only. Never divide Equity Value by EBITDA. Never divide Enterprise Value by Net Income. They must match."
+    },
+    {
+      "id": "ev-2",
+      "file": "audio/ev-2.mp3",
+      "size": 444672,
+      "script": "Let's go deeper on why Enterprise Value is so important. Imagine two identical companies. Same revenue, same profit, same everything. But Company A has zero debt and a billion in cash. Company B has 2 billion in debt and no cash. Their Equity Values could be similar. But the true cost of acquiring them? Completely different. For Company A, you pay the equity price but get a billion in cash back. Net cost is lower. For Company B, you pay the equity price AND take on 2 billion in debt. Net cost is much higher. Enterprise Value captures this difference. It's capital-structure neutral. That's why analysts use EV-based multiples for comparing companies across industries. A company's choice to use debt versus equity shouldn't distort the comparison. Quick formula check. Enterprise Value equals Equity Value plus total Debt plus Preferred Stock plus Minority Interest minus Cash and Cash Equivalents. If a company has tons of cash, its Enterprise Value can actually be lower than its Equity Value. And if it's heavily indebted? Enterprise Value will be much higher."
+    },
+    {
+      "id": "lbo-1",
+      "file": "audio/lbo-1.mp3",
+      "size": 486720,
+      "script": "LBO. Leveraged Buyout. This is the bread and butter of private equity. The concept: a PE firm buys a company using mostly borrowed money. The company's own cash flow pays down the debt. A few years later, the PE firm sells and keeps the profit. Typical structure: the PE firm puts in 30 to 40 percent equity. The rest, 60 to 70 percent, comes from debt. Here's an example. A PE firm buys a company for 100 million. They put in 35 million of their own money and borrow 65 million. Over the next 5 years, the company generates cash and pays down 40 million of debt. Now there's only 25 million of debt left. If they sell the company for the same 100 million... they get 100 minus 25 in remaining debt... that's 75 million back. They put in 35 and got back 75. That's a 2.1x return. And if the company grew and they sell for 130 million? That's 105 million back on 35 invested. A 3x return. Returns are measured by IRR... Internal Rate of Return, target 20 percent plus. And MOIC... Multiple of Invested Capital, target 2 to 3x."
+    },
+    {
+      "id": "lbo-2",
+      "file": "audio/lbo-2.mp3",
+      "size": 448416,
+      "script": "In an LBO, there are four levers to increase returns. Understanding these is essential. Lever one: Revenue Growth. Grow the top line organically or through acquisitions. More revenue means more cash flow to pay down debt and a higher exit value. Lever two: Margin Expansion. Cut costs, improve efficiency, renegotiate supplier contracts. Even small margin improvements compound into significant value. Lever three: Debt Paydown. This is the most reliable lever. As the company pays down debt with its cash flow, more of the enterprise value belongs to equity holders at exit. This works even with zero growth. Lever four: Multiple Expansion. If you buy at 6 times EBITDA and sell at 8 times... that's a huge boost. But here's the catch: you can't control market multiples. So never assume multiple expansion in your base case. If an interviewer asks what drives LBO returns... lead with debt paydown. It's the most predictable. Then mention revenue growth and margin expansion as operational improvements. And only mention multiple expansion as potential upside... not as something you count on."
+    },
+    {
+      "id": "ma-1",
+      "file": "audio/ma-1.mp3",
+      "size": 396288,
+      "script": "Merger Models. The number one question: is this deal accretive or dilutive? If the combined company's Earnings Per Share goes up after the deal... it's accretive. That's good. If EPS goes down... it's dilutive. Not great. For a cash deal, it's straightforward. Compare the earnings yield of the target to the after-tax cost of debt. If the target yields more than what you're paying in interest... accretive. For a stock deal, compare P/E ratios. If the buyer has a higher P/E than the target... the deal is usually accretive for the buyer. Why? Because a higher P/E means investors value each dollar of your earnings more. So when you issue shares to buy a cheaper company, you're getting more earnings per share than you're giving up. In practice, most large deals are dilutive in year one. But they become accretive by year two or three as synergies kick in. Synergies are the cost savings and revenue gains from combining two companies. Think: eliminating duplicate departments, better purchasing power, cross-selling products."
+    },
+    {
+      "id": "ma-2",
+      "file": "audio/ma-2.mp3",
+      "size": 432000,
+      "script": "When a company acquires another company, it almost always pays more than book value. That premium creates Goodwill. Here's the formula. Purchase Price minus the Fair Value of Net Assets equals Goodwill. Net Assets means Assets minus Liabilities... but at fair market value, not book value. Big difference. Book value is historical. Fair value is what things are actually worth today. So if you pay 500 million for a company whose net assets are worth 300 million at fair value... you create 200 million in Goodwill. Goodwill sits on the Balance Sheet as a long-term intangible asset. Unlike other intangibles, it is not amortized. Instead, it's tested annually for impairment. If the acquired business loses value, you write down the Goodwill. That impairment charge hits the Income Statement and is a red flag. It means the acquisition destroyed value. One rare scenario: what if you pay less than fair value? That's called a bargain purchase or negative Goodwill. The difference is recorded as a gain on the Income Statement. It's uncommon, but interviewers love asking about it."
+    },
+    {
+      "id": "val-1",
+      "file": "audio/val-1.mp3",
+      "size": 458352,
+      "script": "Valuation. Three main methods. Each gives you a different perspective, and you should use all three. Method one: Public Comps. Also called trading multiples. You find similar public companies and compare their valuation multiples. EV to EBITDA, P/E ratio, things like that. This tells you what the market is currently willing to pay. Method two: Precedent Transactions. You look at recent M&A deals involving similar companies and see what multiples were paid. These are typically higher than public comps because they include a control premium... usually 20 to 40 percent. Method three: the DCF. Discounted Cash Flow. This is the intrinsic value based on the company's projected future cash flows. It's the most \"rigorous\" method but also the most sensitive to assumptions. In practice, you present all three as a range on what's called a football field chart. It's a horizontal bar chart showing the valuation range from each method. If all three methods agree on a range, you have high conviction. If they diverge significantly, you need to dig deeper and understand why. The key is to never rely on just one method. Triangulate."
+    },
+    {
+      "id": "val-2",
+      "file": "audio/val-2.mp3",
+      "size": 507600,
+      "script": "Let's cover the most important valuation multiples. You need to know these cold. EV to Revenue. Used for high-growth companies that aren't yet profitable. Think early-stage tech or SaaS companies. Typical range: 5 to 15x for high growth. EV to EBITDA. The most commonly used enterprise-level multiple. It strips out the effects of capital structure, taxes, and non-cash items. Typical range: 6 to 12x for most industries. EV to EBIT. Similar to EBITDA but includes Depreciation and Amortization. Useful when D&A differs significantly between companies you're comparing. P/E ratio. Price to Earnings. The most common equity-level multiple. Typical range: 15 to 25x. Higher for growth companies, lower for mature ones. And Price to Book Value. Mainly used for banks and financial institutions where book value is a meaningful measure of worth. The absolute critical rule: always match enterprise metrics with Enterprise Value, and equity metrics with Equity Value. EV goes with Revenue, EBIT, and EBITDA. Equity Value goes with Net Income and EPS. Cross them, and your analysis is fundamentally wrong. Interviewers will catch it immediately."
+    }
+  ]
+}
