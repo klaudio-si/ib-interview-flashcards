@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Interview Flashcards</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #fff; min-height: 100vh; }
+.header { padding: 30px 40px; background: #16213e; border-bottom: 3px solid #007bff; }
+.header h1 { font-size: 28px; margin-bottom: 5px; }
+.header p { color: #8888aa; font-size: 14px; }
+.stats { display: flex; gap: 15px; margin-top: 15px; }
+.stat { background: #1a1a2e; padding: 10px 20px; border-radius: 8px; text-align: center; }
+.stat .num { font-size: 24px; font-weight: bold; }
+.stat .label { font-size: 11px; color: #8888aa; }
+
+.nav { display: flex; gap: 10px; padding: 20px 40px; flex-wrap: wrap; }
+.nav button { padding: 10px 20px; border: 2px solid #333; background: #16213e; color: #ccc; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.nav button:hover { border-color: #007bff; color: #fff; }
+.nav button.active { background: #007bff; border-color: #007bff; color: #fff; }
+
+.controls { padding: 10px 40px; display: flex; gap: 15px; align-items: center; }
+.controls select, .controls input { padding: 8px 12px; background: #16213e; border: 1px solid #333; color: #fff; border-radius: 6px; font-size: 14px; }
+.controls input { width: 300px; }
+.controls label { color: #8888aa; font-size: 13px; }
+
+.cards-container { padding: 20px 40px; }
+.card { background: #16213e; border-radius: 12px; margin-bottom: 15px; overflow: hidden; border-left: 4px solid #007bff; transition: all 0.2s; }
+.card:hover { transform: translateX(5px); }
+.card.basic { border-left-color: #00c9a7; }
+.card.advanced { border-left-color: #ff4545; }
+.card-header { padding: 18px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; }
+.card-header:hover { background: #1e2a4a; }
+.card-q { font-size: 15px; font-weight: 600; flex: 1; line-height: 1.5; }
+.card-badge { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; white-space: nowrap; margin-left: 15px; }
+.card.basic .card-badge { background: #00c9a722; color: #00c9a7; }
+.card.advanced .card-badge { background: #ff454522; color: #ff4545; }
+.card-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: all 0.3s ease; }
+.card-answer.open { max-height: 1000px; padding: 0 25px 20px; }
+.card-answer p { color: #ccccdd; font-size: 14px; line-height: 1.7; background: #1a1a2e; padding: 15px; border-radius: 8px; }
+.card-num { color: #555; font-size: 13px; margin-right: 8px; }
+
+.flip-icon { color: #555; font-size: 20px; transition: transform 0.3s; }
+.card.open .flip-icon { transform: rotate(180deg); color: #007bff; }
+
+.score-bar { display: flex; gap: 5px; margin-left: 15px; }
+.score-btn { width: 28px; height: 28px; border-radius: 50%; border: none; cursor: pointer; font-size: 14px; opacity: 0.6; transition: all 0.2s; }
+.score-btn:hover { opacity: 1; transform: scale(1.2); }
+.score-btn.green { background: #00c9a7; color: #fff; }
+.score-btn.yellow { background: #ffc107; color: #000; }
+.score-btn.red { background: #ff4545; color: #fff; }
+.score-btn.selected { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px rgba(255,255,255,0.3); }
+
+.progress { padding: 10px 40px; }
+.progress-bar { height: 6px; background: #333; border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #007bff, #00c9a7); transition: width 0.3s; border-radius: 3px; }
+.progress-text { font-size: 12px; color: #8888aa; margin-top: 5px; }
+
+.empty { text-align: center; padding: 60px; color: #555; font-size: 18px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Technical Interview Flashcards</h1>
+  <p>Wells Fargo Securities | Investment Banking Interview Preparation</p>
+  <div class="stats">
+    <div class="stat"><div class="num" id="totalCards">0</div><div class="label">TOTAL CARDS</div></div>
+    <div class="stat"><div class="num" style="color:#00c9a7" id="knownCount">0</div><div class="label">KNOWN</div></div>
+    <div class="stat"><div class="num" style="color:#ffc107" id="reviewCount">0</div><div class="label">REVIEW</div></div>
+    <div class="stat"><div class="num" style="color:#ff4545" id="unknownCount">0</div><div class="label">UNKNOWN</div></div>
+  </div>
+</div>
+
+<div class="nav" id="sectionNav"></div>
+
+<div class="controls">
+  <label>Filter:</label>
+  <select id="diffFilter">
+    <option value="all">All</option>
+    <option value="Basic">Basic only</option>
+    <option value="Advanced">Advanced only</option>
+  </select>
+  <select id="scoreFilter">
+    <option value="all">All scores</option>
+    <option value="unknown">Unknown / Not rated</option>
+    <option value="review">Needs review</option>
+    <option value="known">Known</option>
+  </select>
+  <input type="text" id="searchBox" placeholder="Search questions...">
+</div>
+
+<div class="progress">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText"></div>
+</div>
+
+<div class="cards-container" id="cardsContainer"></div>
+
+<script>
+let data = null;
+let currentSection = null;
+let scores = JSON.parse(localStorage.getItem('flashcard-scores') || '{}');
+
+async function loadData() {
+  const resp = await fetch('all_flashcards.json');
+  data = await resp.json();
+  document.getElementById('totalCards').textContent = data.total_flashcards;
+  buildNav();
+  // Show first section
+  const firstSection = Object.keys(data.sections).find(k => data.sections[k].count > 0);
+  if (firstSection) selectSection(firstSection);
+  updateStats();
+}
+
+function buildNav() {
+  const nav = document.getElementById('sectionNav');
+  const colors = {
+    'Accounting': '#007bff',
+    'DCF (Discounted Cash Flow)': '#00c9a7',
+    'Equity Value & Enterprise Value': '#ff8c00',
+    'LBO (Leveraged Buyout)': '#ff4545',
+    'Merger Model': '#a855f7',
+    'Valuation': '#38b2ac'
+  };
+  for (const [name, section] of Object.entries(data.sections)) {
+    if (section.count === 0) continue;
+    const btn = document.createElement('button');
+    btn.textContent = `${name} (${section.count})`;
+    btn.onclick = () => selectSection(name);
+    btn.dataset.section = name;
+    btn.style.borderColor = colors[name] || '#007bff';
+    nav.appendChild(btn);
+  }
+}
+
+function selectSection(name) {
+  currentSection = name;
+  document.querySelectorAll('.nav button').forEach(b => {
+    b.classList.toggle('active', b.dataset.section === name);
+  });
+  renderCards();
+}
+
+function renderCards() {
+  const container = document.getElementById('cardsContainer');
+  const diffFilter = document.getElementById('diffFilter').value;
+  const scoreFilter = document.getElementById('scoreFilter').value;
+  const search = document.getElementById('searchBox').value.toLowerCase();
+
+  if (!currentSection || !data.sections[currentSection]) {
+    container.innerHTML = '<div class="empty">Select a section</div>';
+    return;
+  }
+
+  let cards = data.sections[currentSection].flashcards;
+
+  if (diffFilter !== 'all') cards = cards.filter(c => c.difficulty === diffFilter);
+  if (search) cards = cards.filter(c => c.question.toLowerCase().includes(search) || c.answer.toLowerCase().includes(search));
+  if (scoreFilter !== 'all') {
+    cards = cards.filter(c => {
+      const key = `${currentSection}-${c.number}`;
+      const s = scores[key];
+      if (scoreFilter === 'unknown') return !s || s === 'unknown';
+      if (scoreFilter === 'review') return s === 'review';
+      if (scoreFilter === 'known') return s === 'known';
+      return true;
+    });
+  }
+
+  if (cards.length === 0) {
+    container.innerHTML = '<div class="empty">No cards match your filters</div>';
+    return;
+  }
+
+  container.innerHTML = cards.map(card => {
+    const key = `${currentSection}-${card.number}`;
+    const score = scores[key] || '';
+    return `
+      <div class="card ${card.difficulty.toLowerCase()} ${score}" data-key="${key}">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="card-q"><span class="card-num">#${card.number}</span>${card.question}</div>
+          <div class="card-badge">${card.difficulty}</div>
+          <div class="score-bar">
+            <button class="score-btn green ${score==='known'?'selected':''}" onclick="event.stopPropagation();setScore('${key}','known')" title="I know this">&#10003;</button>
+            <button class="score-btn yellow ${score==='review'?'selected':''}" onclick="event.stopPropagation();setScore('${key}','review')" title="Need review">~</button>
+            <button class="score-btn red ${score==='unknown'?'selected':''}" onclick="event.stopPropagation();setScore('${key}','unknown')" title="Don't know">&#10007;</button>
+          </div>
+          <span class="flip-icon">&#9660;</span>
+        </div>
+        <div class="card-answer"><p>${card.answer}</p></div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleCard(header) {
+  const card = header.parentElement;
+  const answer = card.querySelector('.card-answer');
+  card.classList.toggle('open');
+  answer.classList.toggle('open');
+}
+
+function setScore(key, value) {
+  scores[key] = value;
+  localStorage.setItem('flashcard-scores', JSON.stringify(scores));
+  renderCards();
+  updateStats();
+}
+
+function updateStats() {
+  if (!data) return;
+  let known = 0, review = 0, unknown = 0;
+  for (const v of Object.values(scores)) {
+    if (v === 'known') known++;
+    else if (v === 'review') review++;
+    else if (v === 'unknown') unknown++;
+  }
+  document.getElementById('knownCount').textContent = known;
+  document.getElementById('reviewCount').textContent = review;
+  document.getElementById('unknownCount').textContent = unknown;
+
+  const total = data.total_flashcards;
+  const pct = Math.round((known / total) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${known} of ${total} mastered (${pct}%)`;
+}
+
+document.getElementById('diffFilter').onchange = renderCards;
+document.getElementById('scoreFilter').onchange = renderCards;
+document.getElementById('searchBox').oninput = renderCards;
+
+loadData();
+</script>
+</body>
+</html>
