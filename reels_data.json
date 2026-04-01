@@ -1,0 +1,293 @@
+{
+  "reels": [
+    {
+      "id": "acc-1",
+      "section": "Accounting",
+      "title": "The Income Statement",
+      "emoji": "icon-chart",
+      "color": "#007bff",
+      "content": "Lists revenue, expenses, and taxes over a period of time (quarter/year).",
+      "key_points": [
+        "Revenue - COGS = Gross Profit",
+        "Gross Profit - OpEx - D&A = Operating Income",
+        "Operating Income +/- Other = Pre-Tax Income",
+        "Pre-Tax Income - Taxes = Net Income (bottom line)"
+      ],
+      "golden_rule": "To appear on the IS: must affect taxes AND correspond to the period shown.",
+      "pro_tip": "Never appears: CapEx, Dividends, Debt Principal, Share Repurchases"
+    },
+    {
+      "id": "acc-2",
+      "section": "Accounting",
+      "title": "The Balance Sheet",
+      "emoji": "icon-balance",
+      "color": "#007bff",
+      "content": "Shows Assets and how they were funded (Liabilities + Equity) at a point in time.",
+      "key_points": [
+        "Assets = Liabilities + Equity (ALWAYS)",
+        "Current = under 1 year | Long-Term = over 1 year",
+        "Assets: Cash, AR, Inventory, PP&E, Goodwill",
+        "Liabilities: AP, Debt, Deferred Revenue",
+        "Equity: Common Stock, Retained Earnings, Treasury Stock"
+      ],
+      "golden_rule": "Assets must ALWAYS equal Liabilities + Equity. No exceptions.",
+      "pro_tip": "Think of YOUR balance sheet: house + savings = mortgage + saved earnings"
+    },
+    {
+      "id": "acc-3",
+      "section": "Accounting",
+      "title": "The Cash Flow Statement",
+      "emoji": "icon-cash",
+      "color": "#007bff",
+      "content": "Tracks actual cash changes over a period. Exists because the IS has non-cash items.",
+      "key_points": [
+        "CFO: Net Income + non-cash adjustments + WC changes",
+        "CFI: CapEx, acquisitions, investment purchases/sales",
+        "CFF: Debt issued/repaid, dividends, share buybacks",
+        "Beginning Cash + Total Changes = Ending Cash"
+      ],
+      "golden_rule": "If it was on the IS and is real cash, it does NOT reappear here.",
+      "pro_tip": "Depreciation is added back in CFO because it reduced Net Income but is not real cash."
+    },
+    {
+      "id": "acc-4",
+      "section": "Accounting",
+      "title": "Linking the 3 Statements",
+      "emoji": "icon-link",
+      "color": "#007bff",
+      "content": "The 3 financial statements are interconnected in a specific flow.",
+      "key_points": [
+        "1. Net Income flows from IS to top of CFS",
+        "2. CFS adjusts for non-cash items and working capital",
+        "3. Net change in cash updates Cash on BS",
+        "4. Retained Earnings on BS += Net Income - Dividends",
+        "5. BS must STILL balance after all changes"
+      ],
+      "golden_rule": "Always follow: Income Statement -> Cash Flow Statement -> Balance Sheet.",
+      "pro_tip": "This is THE most common interview question. Practice it until automatic."
+    },
+    {
+      "id": "acc-5",
+      "section": "Accounting",
+      "title": "How Changes Flow Through",
+      "emoji": "icon-flow",
+      "color": "#007bff",
+      "content": "When something changes, it ripples through all 3 statements.",
+      "key_points": [
+        "Example: Depreciation goes UP by $10 (40% tax rate)",
+        "IS: Pre-Tax Income falls $10, Net Income falls $6",
+        "CFS: Net Income -$6, add back D&A +$10 = Cash +$4",
+        "BS: Cash +$4, PP&E -$10 = Assets -$6",
+        "BS: Retained Earnings -$6 = L+E -$6. BALANCED."
+      ],
+      "golden_rule": "Always trace: IS impact -> tax effect -> CFS adjustments -> BS balance check.",
+      "pro_tip": "Tax rate matters! $10 expense only reduces cash by $6 if tax rate is 40%."
+    },
+    {
+      "id": "dcf-1",
+      "section": "DCF",
+      "title": "What is a DCF?",
+      "emoji": "icon-target",
+      "color": "#00c9a7",
+      "content": "Values a company based on its future cash flows, discounted to present value.",
+      "key_points": [
+        "1. Project Free Cash Flow for 5-10 years",
+        "2. Calculate Terminal Value (far-future value)",
+        "3. Discount both back to today using WACC",
+        "4. Sum of both = Enterprise Value",
+        "5. Enterprise Value - Net Debt = Equity Value"
+      ],
+      "golden_rule": "A company is worth the present value of ALL its future cash flows.",
+      "pro_tip": "Terminal Value is usually 50-80% of total value. If >85%, check your assumptions."
+    },
+    {
+      "id": "dcf-2",
+      "section": "DCF",
+      "title": "Revenue to Free Cash Flow",
+      "emoji": "icon-funnel",
+      "color": "#00c9a7",
+      "content": "How to calculate Unlevered Free Cash Flow (UFCF) step by step.",
+      "key_points": [
+        "Revenue - COGS - OpEx = EBIT",
+        "EBIT x (1 - Tax Rate) = NOPAT",
+        "+ Depreciation & Amortization",
+        "- Changes in Working Capital",
+        "- Capital Expenditures",
+        "= Unlevered Free Cash Flow"
+      ],
+      "golden_rule": "UFCF excludes interest/debt effects. Shows cash available to ALL investors.",
+      "pro_tip": "Levered FCF subtracts interest and mandatory debt repayments (for equity holders only)."
+    },
+    {
+      "id": "dcf-3",
+      "section": "DCF",
+      "title": "WACC & Discount Rate",
+      "emoji": "icon-percent",
+      "color": "#00c9a7",
+      "content": "Weighted Average Cost of Capital - the rate to discount future cash flows.",
+      "key_points": [
+        "WACC = %Equity x Cost of Equity + %Debt x Cost of Debt x (1-Tax)",
+        "Cost of Equity = Risk-Free Rate + Beta x Equity Risk Premium",
+        "Risk-Free Rate = 10-year government bond yield",
+        "Beta measures stock volatility vs. the market",
+        "Higher WACC = lower present value = lower valuation"
+      ],
+      "golden_rule": "WACC represents the blended required return for ALL investors (debt + equity).",
+      "pro_tip": "Typical WACC ranges: 8-12% for most companies. Lower for stable, higher for risky."
+    },
+    {
+      "id": "dcf-4",
+      "section": "DCF",
+      "title": "Terminal Value",
+      "emoji": "icon-infinity",
+      "color": "#00c9a7",
+      "content": "Represents the company's value BEYOND the projection period.",
+      "key_points": [
+        "Gordon Growth: FCF x (1+g) / (WACC - g)",
+        "Multiples Method: Final Year EBITDA x Exit Multiple",
+        "Growth rate (g) should be <= GDP growth (2-3%)",
+        "Must discount Terminal Value back to present",
+        "Usually 50-80% of total Enterprise Value"
+      ],
+      "golden_rule": "Long-term growth can NEVER exceed GDP growth. No company grows forever.",
+      "pro_tip": "Multiples Method is more common in banking. Gordon Growth is more academic."
+    },
+    {
+      "id": "ev-1",
+      "section": "EV / Equity Value",
+      "title": "Equity Value vs Enterprise Value",
+      "emoji": "icon-building",
+      "color": "#ff8c00",
+      "content": "Two ways to measure what a company is worth - for different audiences.",
+      "key_points": [
+        "Equity Value = Share Price x Diluted Shares",
+        "Enterprise Value = Equity Value + Debt + Pref + MI - Cash",
+        "Equity Value = value to SHAREHOLDERS only",
+        "Enterprise Value = value to ALL investors",
+        "EV is capital-structure neutral (better for comparisons)"
+      ],
+      "golden_rule": "Match metrics: EV with EBIT/EBITDA/Revenue. Equity Value with Net Income/EPS.",
+      "pro_tip": "When the news says 'a $10B company', they usually mean Equity Value."
+    },
+    {
+      "id": "ev-2",
+      "section": "EV / Equity Value",
+      "title": "Why Enterprise Value Matters",
+      "emoji": "icon-puzzle",
+      "color": "#ff8c00",
+      "content": "EV tells you what you'd REALLY pay to acquire a company.",
+      "key_points": [
+        "Buying a company = buying its equity + assuming its debt",
+        "But you also get its cash (offsets the price)",
+        "EV = what an acquirer truly pays, net of cash received",
+        "Preferred Stock and Minority Interest also add to cost",
+        "That's why EV = Equity + Debt + Pref + MI - Cash"
+      ],
+      "golden_rule": "Think of buying a house: price (equity) + mortgage (debt) - cash in safe = true cost.",
+      "pro_tip": "Companies with lots of cash have EV < Equity Value. Heavily indebted: EV >> Equity Value."
+    },
+    {
+      "id": "lbo-1",
+      "section": "LBO",
+      "title": "How an LBO Works",
+      "emoji": "icon-bank",
+      "color": "#ff4545",
+      "content": "A PE firm buys a company using mostly debt, improves it, and sells for profit.",
+      "key_points": [
+        "PE firm puts in 30-40% equity, 60-70% debt",
+        "Company's cash flow pays down the debt over 3-7 years",
+        "PE firm sells at exit: debt repaid, remainder = profit",
+        "Returns: IRR target 20%+, MOIC target 2-3x",
+        "Key levers: growth, margins, debt paydown, multiple expansion"
+      ],
+      "golden_rule": "An LBO works when the company generates enough cash flow to service the debt.",
+      "pro_tip": "Think: buy a house with 30% down, rent it out, tenant pays mortgage, sell in 5 years."
+    },
+    {
+      "id": "lbo-2",
+      "section": "LBO",
+      "title": "LBO Returns: The 4 Levers",
+      "emoji": "icon-lever",
+      "color": "#ff4545",
+      "content": "Four ways a PE firm increases returns in an LBO.",
+      "key_points": [
+        "1. Revenue Growth: grow the top line organically or via acquisitions",
+        "2. Margin Expansion: cut costs, improve efficiency",
+        "3. Debt Paydown: use cash flow to reduce debt (more equity at exit)",
+        "4. Multiple Expansion: sell at a higher EV/EBITDA than you bought",
+        "Debt paydown is the most reliable lever"
+      ],
+      "golden_rule": "Even with 0% growth, debt paydown alone can generate strong returns.",
+      "pro_tip": "Multiple expansion is the least controllable. Never assume it in a base case."
+    },
+    {
+      "id": "ma-1",
+      "section": "Merger Model",
+      "title": "Accretion / Dilution",
+      "emoji": "icon-merge",
+      "color": "#a855f7",
+      "content": "The key M&A question: does the deal increase or decrease the buyer's EPS?",
+      "key_points": [
+        "Accretive = buyer's EPS goes UP after the deal",
+        "Dilutive = buyer's EPS goes DOWN after the deal",
+        "Cash deal: compare target's yield vs. lost interest (after tax)",
+        "Stock deal: compare P/E ratios",
+        "If buyer P/E > target P/E = likely accretive (stock deal)"
+      ],
+      "golden_rule": "In a stock deal, the company with the HIGHER P/E ratio wins.",
+      "pro_tip": "Most large deals are dilutive in Year 1 but accretive by Year 2-3 (synergies kick in)."
+    },
+    {
+      "id": "ma-2",
+      "section": "Merger Model",
+      "title": "Goodwill & Purchase Price",
+      "emoji": "icon-tag",
+      "color": "#a855f7",
+      "content": "When you buy a company, you almost always pay MORE than its book value.",
+      "key_points": [
+        "Purchase Price - Fair Value of Net Assets = Goodwill",
+        "Net Assets = Assets - Liabilities (at fair value, not book)",
+        "Goodwill sits on the BS as a Long-Term Asset",
+        "Goodwill is NOT amortized (tested annually for impairment)",
+        "If you pay LESS than fair value = Negative Goodwill (rare)"
+      ],
+      "golden_rule": "Goodwill represents the premium paid for brand, talent, synergies, and market position.",
+      "pro_tip": "Goodwill impairment is a big red flag: it means the acquisition destroyed value."
+    },
+    {
+      "id": "val-1",
+      "section": "Valuation",
+      "title": "The Valuation Toolkit",
+      "emoji": "icon-tools",
+      "color": "#38b2ac",
+      "content": "Three main methods to value a company, each with different strengths.",
+      "key_points": [
+        "1. Public Comps: multiples of similar public companies",
+        "2. Precedent Transactions: multiples from similar M&A deals",
+        "3. DCF: intrinsic value based on projected cash flows",
+        "Precedents > Comps (includes control premium of 20-40%)",
+        "Always present a valuation RANGE, not a single number"
+      ],
+      "golden_rule": "Use a 'football field' chart showing ranges from each method to triangulate fair value.",
+      "pro_tip": "If all 3 methods agree on a range, you have high conviction. If they diverge, dig deeper."
+    },
+    {
+      "id": "val-2",
+      "section": "Valuation",
+      "title": "Key Multiples to Know",
+      "emoji": "icon-numbers",
+      "color": "#38b2ac",
+      "content": "The most commonly used valuation multiples in investment banking.",
+      "key_points": [
+        "EV/Revenue: high-growth, pre-profit companies (SaaS: 5-15x)",
+        "EV/EBITDA: most common enterprise multiple (6-12x typical)",
+        "EV/EBIT: like EBITDA but captures D&A differences",
+        "P/E: most common equity multiple (15-25x typical)",
+        "P/BV (Price/Book): for banks and financial institutions"
+      ],
+      "golden_rule": "NEVER divide Equity Value by an enterprise metric (or vice versa). They must match.",
+      "pro_tip": "Higher growth = higher multiple. Compare multiples WITHIN the same industry only."
+    }
+  ],
+  "total": 17
+}

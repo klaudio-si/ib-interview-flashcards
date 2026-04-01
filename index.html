@@ -3,24 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Technical Interview Flashcards</title>
+<title>IB Interview Prep - Flashcards & Reels</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #fff; min-height: 100vh; }
+
+/* ===== HEADER ===== */
 .header { padding: 30px 40px; background: #16213e; border-bottom: 3px solid #007bff; }
 .header h1 { font-size: 28px; margin-bottom: 5px; }
 .header p { color: #8888aa; font-size: 14px; }
-.stats { display: flex; gap: 15px; margin-top: 15px; }
+.stats { display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
 .stat { background: #1a1a2e; padding: 10px 20px; border-radius: 8px; text-align: center; }
 .stat .num { font-size: 24px; font-weight: bold; }
 .stat .label { font-size: 11px; color: #8888aa; }
 
+/* ===== MODE TOGGLE ===== */
+.mode-toggle { display: flex; gap: 0; padding: 20px 40px 0; }
+.mode-btn { padding: 14px 32px; border: 2px solid #333; background: #16213e; color: #888; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.mode-btn:first-child { border-radius: 10px 0 0 10px; }
+.mode-btn:last-child { border-radius: 0 10px 10px 0; }
+.mode-btn.active { background: #007bff; border-color: #007bff; color: #fff; }
+.mode-btn:hover:not(.active) { border-color: #007bff; color: #ccc; }
+
+/* ===== FLASHCARDS VIEW ===== */
+.flashcards-view { display: block; }
 .nav { display: flex; gap: 10px; padding: 20px 40px; flex-wrap: wrap; }
 .nav button { padding: 10px 20px; border: 2px solid #333; background: #16213e; color: #ccc; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
 .nav button:hover { border-color: #007bff; color: #fff; }
 .nav button.active { background: #007bff; border-color: #007bff; color: #fff; }
 
-.controls { padding: 10px 40px; display: flex; gap: 15px; align-items: center; }
+.controls { padding: 10px 40px; display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
 .controls select, .controls input { padding: 8px 12px; background: #16213e; border: 1px solid #333; color: #fff; border-radius: 6px; font-size: 14px; }
 .controls input { width: 300px; }
 .controls label { color: #8888aa; font-size: 13px; }
@@ -40,7 +52,6 @@ body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #fff; mi
 .card-answer.open { max-height: 1000px; padding: 0 25px 20px; }
 .card-answer p { color: #ccccdd; font-size: 14px; line-height: 1.7; background: #1a1a2e; padding: 15px; border-radius: 8px; }
 .card-num { color: #555; font-size: 13px; margin-right: 8px; }
-
 .flip-icon { color: #555; font-size: 20px; transition: transform 0.3s; }
 .card.open .flip-icon { transform: rotate(180deg); color: #007bff; }
 
@@ -56,59 +67,323 @@ body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #fff; mi
 .progress-bar { height: 6px; background: #333; border-radius: 3px; overflow: hidden; }
 .progress-fill { height: 100%; background: linear-gradient(90deg, #007bff, #00c9a7); transition: width 0.3s; border-radius: 3px; }
 .progress-text { font-size: 12px; color: #8888aa; margin-top: 5px; }
-
 .empty { text-align: center; padding: 60px; color: #555; font-size: 18px; }
+
+/* ===== REELS VIEW ===== */
+.reels-view { display: none; }
+
+.reels-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Reel phone frame */
+.reel-phone {
+  width: 380px;
+  min-height: 680px;
+  background: #0d0d1a;
+  border-radius: 40px;
+  border: 3px solid #333;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.reel-screen {
+  height: 680px;
+  overflow: hidden;
+  position: relative;
+}
+
+.reel-slide {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
+  opacity: 0;
+  transform: translateY(100%);
+}
+.reel-slide.active { opacity: 1; transform: translateY(0); }
+.reel-slide.prev { opacity: 0; transform: translateY(-100%); }
+
+.reel-section-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
+
+.reel-title {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.reel-content {
+  font-size: 14px;
+  color: #aab;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.reel-points {
+  list-style: none;
+  margin-bottom: 20px;
+}
+.reel-points li {
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  border-left: 3px solid var(--reel-color, #007bff);
+  animation: slideIn 0.3s ease forwards;
+  opacity: 0;
+}
+.reel-slide.active .reel-points li {
+  opacity: 1;
+}
+.reel-slide.active .reel-points li:nth-child(1) { animation-delay: 0.1s; }
+.reel-slide.active .reel-points li:nth-child(2) { animation-delay: 0.2s; }
+.reel-slide.active .reel-points li:nth-child(3) { animation-delay: 0.3s; }
+.reel-slide.active .reel-points li:nth-child(4) { animation-delay: 0.4s; }
+.reel-slide.active .reel-points li:nth-child(5) { animation-delay: 0.5s; }
+.reel-slide.active .reel-points li:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-15px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.reel-rule {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+}
+.reel-rule-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.reel-rule-text {
+  font-size: 12px;
+  color: #dde;
+  line-height: 1.5;
+}
+
+.reel-tip {
+  font-size: 11px;
+  color: #888;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+/* Reel navigation */
+.reel-nav-arrows {
+  position: absolute;
+  bottom: 20px;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+.reel-nav-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reel-nav-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
+.reel-counter { font-size: 14px; color: #888; min-width: 60px; text-align: center; }
+
+/* Progress dots */
+.reel-dots {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+.reel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.reel-dot.active {
+  background: #fff;
+  height: 20px;
+  border-radius: 3px;
+}
+
+/* Sidebar - reel list */
+.reels-sidebar {
+  width: 350px;
+  max-height: 700px;
+  overflow-y: auto;
+}
+.reels-sidebar h3 { font-size: 16px; margin-bottom: 15px; color: #888; }
+.reel-list-item {
+  padding: 12px 15px;
+  background: #16213e;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+.reel-list-item:hover { background: #1e2a4a; }
+.reel-list-item.active { border-left-color: #007bff; background: #1e2a4a; }
+.reel-list-section { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 3px; }
+.reel-list-title { font-size: 14px; font-weight: 600; }
+
+/* Autoplay bar */
+.autoplay-bar {
+  position: absolute;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #007bff, #00c9a7);
+  transition: width 0.1s linear;
+  z-index: 10;
+  border-radius: 0 0 2px 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 900px) {
+  .reels-wrapper { flex-direction: column; align-items: center; }
+  .reels-sidebar { width: 100%; max-width: 380px; max-height: 300px; }
+  .reel-phone { width: 100%; max-width: 380px; }
+  .controls { flex-direction: column; align-items: flex-start; }
+  .controls input { width: 100%; }
+  .nav { padding: 10px 20px; }
+  .cards-container { padding: 10px 15px; }
+  .header { padding: 20px; }
+  .mode-toggle { padding: 15px 20px 0; }
+}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>Technical Interview Flashcards</h1>
-  <p>Wells Fargo Securities | Investment Banking Interview Preparation</p>
+  <h1>IB Interview Prep</h1>
+  <p>Wells Fargo Securities | Investment Banking Technical Interview Guide</p>
   <div class="stats">
-    <div class="stat"><div class="num" id="totalCards">0</div><div class="label">TOTAL CARDS</div></div>
+    <div class="stat"><div class="num" id="totalCards">0</div><div class="label">FLASHCARDS</div></div>
+    <div class="stat"><div class="num" style="color:#a855f7" id="totalReels">0</div><div class="label">REELS</div></div>
     <div class="stat"><div class="num" style="color:#00c9a7" id="knownCount">0</div><div class="label">KNOWN</div></div>
     <div class="stat"><div class="num" style="color:#ffc107" id="reviewCount">0</div><div class="label">REVIEW</div></div>
     <div class="stat"><div class="num" style="color:#ff4545" id="unknownCount">0</div><div class="label">UNKNOWN</div></div>
   </div>
 </div>
 
-<div class="nav" id="sectionNav"></div>
-
-<div class="controls">
-  <label>Filter:</label>
-  <select id="diffFilter">
-    <option value="all">All</option>
-    <option value="Basic">Basic only</option>
-    <option value="Advanced">Advanced only</option>
-  </select>
-  <select id="scoreFilter">
-    <option value="all">All scores</option>
-    <option value="unknown">Unknown / Not rated</option>
-    <option value="review">Needs review</option>
-    <option value="known">Known</option>
-  </select>
-  <input type="text" id="searchBox" placeholder="Search questions...">
+<!-- Mode toggle -->
+<div class="mode-toggle">
+  <button class="mode-btn active" onclick="switchMode('flashcards')">Flashcards</button>
+  <button class="mode-btn" onclick="switchMode('reels')">Reels</button>
 </div>
 
-<div class="progress">
-  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-  <div class="progress-text" id="progressText"></div>
+<!-- ===== FLASHCARDS VIEW ===== -->
+<div class="flashcards-view" id="flashcardsView">
+  <div class="nav" id="sectionNav"></div>
+  <div class="controls">
+    <label>Filter:</label>
+    <select id="diffFilter">
+      <option value="all">All</option>
+      <option value="Basic">Basic only</option>
+      <option value="Advanced">Advanced only</option>
+    </select>
+    <select id="scoreFilter">
+      <option value="all">All scores</option>
+      <option value="unknown">Unknown / Not rated</option>
+      <option value="review">Needs review</option>
+      <option value="known">Known</option>
+    </select>
+    <input type="text" id="searchBox" placeholder="Search questions...">
+  </div>
+  <div class="progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText"></div>
+  </div>
+  <div class="cards-container" id="cardsContainer"></div>
 </div>
 
-<div class="cards-container" id="cardsContainer"></div>
+<!-- ===== REELS VIEW ===== -->
+<div class="reels-view" id="reelsView">
+  <div class="reels-wrapper">
+    <!-- Phone frame -->
+    <div class="reel-phone">
+      <div class="autoplay-bar" id="autoplayBar"></div>
+      <div class="reel-screen" id="reelScreen"></div>
+      <div class="reel-dots" id="reelDots"></div>
+      <div class="reel-nav-arrows">
+        <button class="reel-nav-btn" onclick="prevReel()">&#9650;</button>
+        <span class="reel-counter" id="reelCounter">1 / 17</span>
+        <button class="reel-nav-btn" onclick="nextReel()">&#9660;</button>
+      </div>
+    </div>
+    <!-- Sidebar -->
+    <div class="reels-sidebar">
+      <h3>All Concept Reels</h3>
+      <div id="reelList"></div>
+    </div>
+  </div>
+</div>
 
 <script>
+/* ===== STATE ===== */
 let data = null;
+let reelsData = null;
 let currentSection = null;
+let currentReel = 0;
+let autoplayTimer = null;
+let autoplayProgress = 0;
 let scores = JSON.parse(localStorage.getItem('flashcard-scores') || '{}');
 
+/* ===== MODE SWITCHING ===== */
+function switchMode(mode) {
+  document.querySelectorAll('.mode-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && mode === 'flashcards') || (i === 1 && mode === 'reels'));
+  });
+  document.getElementById('flashcardsView').style.display = mode === 'flashcards' ? 'block' : 'none';
+  document.getElementById('reelsView').style.display = mode === 'reels' ? 'block' : 'none';
+  if (mode === 'reels') startAutoplay();
+  else stopAutoplay();
+}
+
+/* ===== FLASHCARDS ===== */
 async function loadData() {
   const resp = await fetch('all_flashcards.json');
   data = await resp.json();
   document.getElementById('totalCards').textContent = data.total_flashcards;
   buildNav();
-  // Show first section
   const firstSection = Object.keys(data.sections).find(k => data.sections[k].count > 0);
   if (firstSection) selectSection(firstSection);
   updateStats();
@@ -155,7 +430,6 @@ function renderCards() {
   }
 
   let cards = data.sections[currentSection].flashcards;
-
   if (diffFilter !== 'all') cards = cards.filter(c => c.difficulty === diffFilter);
   if (search) cards = cards.filter(c => c.question.toLowerCase().includes(search) || c.answer.toLowerCase().includes(search));
   if (scoreFilter !== 'all') {
@@ -190,16 +464,14 @@ function renderCards() {
           <span class="flip-icon">&#9660;</span>
         </div>
         <div class="card-answer"><p>${card.answer}</p></div>
-      </div>
-    `;
+      </div>`;
   }).join('');
 }
 
 function toggleCard(header) {
   const card = header.parentElement;
-  const answer = card.querySelector('.card-answer');
   card.classList.toggle('open');
-  answer.classList.toggle('open');
+  card.querySelector('.card-answer').classList.toggle('open');
 }
 
 function setScore(key, value) {
@@ -220,18 +492,145 @@ function updateStats() {
   document.getElementById('knownCount').textContent = known;
   document.getElementById('reviewCount').textContent = review;
   document.getElementById('unknownCount').textContent = unknown;
-
   const total = data.total_flashcards;
-  const pct = Math.round((known / total) * 100);
+  const pct = total > 0 ? Math.round((known / total) * 100) : 0;
   document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('progressText').textContent = `${known} of ${total} mastered (${pct}%)`;
 }
 
+/* ===== REELS ===== */
+async function loadReels() {
+  const resp = await fetch('reels_data.json');
+  reelsData = await resp.json();
+  document.getElementById('totalReels').textContent = reelsData.total;
+  buildReels();
+}
+
+function buildReels() {
+  const screen = document.getElementById('reelScreen');
+  const dots = document.getElementById('reelDots');
+  const list = document.getElementById('reelList');
+
+  screen.innerHTML = reelsData.reels.map((reel, i) => `
+    <div class="reel-slide ${i === 0 ? 'active' : ''}" data-index="${i}" style="--reel-color: ${reel.color}">
+      <div class="reel-section-tag" style="color: ${reel.color}">${reel.section}</div>
+      <div class="reel-title">${reel.title}</div>
+      <div class="reel-content">${reel.content}</div>
+      <ul class="reel-points">
+        ${reel.key_points.map(p => `<li style="border-left-color: ${reel.color}">${p}</li>`).join('')}
+      </ul>
+      <div class="reel-rule">
+        <div class="reel-rule-label" style="color: ${reel.color}">Golden Rule</div>
+        <div class="reel-rule-text">${reel.golden_rule}</div>
+      </div>
+      ${reel.pro_tip ? `<div class="reel-tip">Pro tip: ${reel.pro_tip}</div>` : ''}
+    </div>
+  `).join('');
+
+  dots.innerHTML = reelsData.reels.map((_, i) => `
+    <div class="reel-dot ${i === 0 ? 'active' : ''}" onclick="goToReel(${i})"></div>
+  `).join('');
+
+  list.innerHTML = reelsData.reels.map((reel, i) => `
+    <div class="reel-list-item ${i === 0 ? 'active' : ''}" onclick="goToReel(${i})" data-index="${i}">
+      <div class="reel-list-section" style="color: ${reel.color}">${reel.section}</div>
+      <div class="reel-list-title">${reel.title}</div>
+    </div>
+  `).join('');
+
+  updateReelCounter();
+
+  // Touch/swipe support
+  let touchStartY = 0;
+  screen.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; });
+  screen.addEventListener('touchend', e => {
+    const diff = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextReel(); else prevReel();
+    }
+  });
+
+  // Mouse wheel
+  screen.addEventListener('wheel', e => {
+    e.preventDefault();
+    if (e.deltaY > 0) nextReel(); else prevReel();
+  }, { passive: false });
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('reelsView').style.display === 'none') return;
+    if (e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); nextReel(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); prevReel(); }
+  });
+}
+
+function goToReel(index) {
+  if (index < 0 || index >= reelsData.reels.length || index === currentReel) return;
+
+  const slides = document.querySelectorAll('.reel-slide');
+  const dots = document.querySelectorAll('.reel-dot');
+  const items = document.querySelectorAll('.reel-list-item');
+
+  // Remove all states
+  slides.forEach(s => { s.classList.remove('active', 'prev'); });
+  dots.forEach(d => d.classList.remove('active'));
+  items.forEach(i => i.classList.remove('active'));
+
+  // Set previous slide
+  if (slides[currentReel]) slides[currentReel].classList.add('prev');
+
+  currentReel = index;
+
+  // Activate new slide
+  slides[currentReel].classList.add('active');
+  dots[currentReel].classList.add('active');
+  items[currentReel].classList.add('active');
+
+  // Scroll sidebar item into view
+  items[currentReel].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  updateReelCounter();
+  resetAutoplay();
+}
+
+function nextReel() { goToReel(currentReel + 1 < reelsData.reels.length ? currentReel + 1 : 0); }
+function prevReel() { goToReel(currentReel - 1 >= 0 ? currentReel - 1 : reelsData.reels.length - 1); }
+
+function updateReelCounter() {
+  document.getElementById('reelCounter').textContent = `${currentReel + 1} / ${reelsData.reels.length}`;
+}
+
+/* ===== AUTOPLAY ===== */
+function startAutoplay() {
+  stopAutoplay();
+  autoplayProgress = 0;
+  autoplayTimer = setInterval(() => {
+    autoplayProgress += 1;
+    document.getElementById('autoplayBar').style.width = (autoplayProgress / 120 * 100) + '%';
+    if (autoplayProgress >= 120) { // 12 seconds per reel
+      nextReel();
+      autoplayProgress = 0;
+    }
+  }, 100);
+}
+
+function stopAutoplay() {
+  if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+  document.getElementById('autoplayBar').style.width = '0%';
+}
+
+function resetAutoplay() {
+  autoplayProgress = 0;
+  document.getElementById('autoplayBar').style.width = '0%';
+}
+
+/* ===== INIT ===== */
 document.getElementById('diffFilter').onchange = renderCards;
 document.getElementById('scoreFilter').onchange = renderCards;
 document.getElementById('searchBox').oninput = renderCards;
 
 loadData();
+loadReels();
 </script>
 </body>
 </html>
